@@ -1,6 +1,7 @@
 import pygame as pg
 import random
 import time
+import numpy as np
 
 class Dot:
     def __init__(self):
@@ -27,6 +28,8 @@ class Dot:
         #Tempo de movimento do ponto
         self.timeDot = 0
 
+        self.list_times = np.array([])
+
     def move_dot(self):
         for event in pg.event.get():
             if event.type == pg.VIDEORESIZE:
@@ -41,7 +44,8 @@ class Dot:
         self.timeDot = random.random()
         time.sleep(self.timeDot)
         
-        
+        self.list_times = np.append(self.list_times, self.timeDot)
+
         if random.randint(0,1) == 0:
             lado = 600 
         else:
@@ -58,3 +62,21 @@ class Dot:
     def exit_window(self):
         pg.quit()
 
+    def EventMovement(self):
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_o:
+                    list_times = np.array([])
+                    self.move_dot()
+                else:
+                    break
+
+    def isToClose(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                return True
+            else:
+                return False
+
+    def getListOfTimes(self):
+        return self.list_times

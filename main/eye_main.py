@@ -53,11 +53,14 @@ def main(isToCut):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
-                
+        
+        obj.EventMovement()
+        '''
         if cv2.waitKey(1) == ord('o'):
-            for i in range(10):
-                obj.move_dot()
-        if cv2.waitKey(1) == ord('q'):
+            #for i in range(10):
+            obj.move_dot()
+        '''
+        if cv2.waitKey(1) == ord('q') or obj.isToClose():
             obj.exit_window()
             break
 
