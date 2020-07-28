@@ -110,7 +110,7 @@ if __name__ == '__main__':
     print(">", end=' ')
     inp = input()
     print("\nPress the keyword 'Q' to exit or 'O' to move the dot.\n")
-    if inp.upper() == 'Y':
+    if inp.upper() == 'S':
         main(False)
     else:
         main(True)
