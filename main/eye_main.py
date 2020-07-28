@@ -63,7 +63,6 @@ def main(isToCut):
             break
 
         for (x,y,w,h) in faces:
-            print(w)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
@@ -93,15 +92,6 @@ def main(isToCut):
                         for j in range(len(i.pt)):
                             Coordinate.putCartesianElement(cv2.KeyPoint_convert(keypoints))
                             print(Coordinate.getLastCartesianElement())
-                            '''
-                            #print(y)
-                            #print(Coordinate.getLastRightPos())
-                            if(i.pt[j] < 25):
-                                print(i.pt[j], end='r ')
-                            else: 
-                                print(i.pt[j], end='l ')
-                        print()
-                        '''
                     
         cv2.imshow(name, frame)
     
