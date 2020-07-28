@@ -54,11 +54,10 @@ def main(isToCut):
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
         
-        #obj.EventMovement()
-        if cv2.waitKey(1) == ord('o'):
+        if cv2.waitKey(1) == ord('o') or obj.EventMovement():
             obj.move_dot()
        
-        if cv2.waitKey(1) == ord('q') or obj.isToClose():
+        if cv2.waitKey(1) == ord('q') or cv2.waitKey(1) == ord('Q') or obj.isToClose():
             obj.exit_window()
             break
 
@@ -89,10 +88,7 @@ def main(isToCut):
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
                     
                     for i in keypoints:
-                        for j in range(len(i.pt)):
-                            Coordinate.putCartesianElement(cv2.KeyPoint_convert(keypoints))
-                            print(Coordinate.getLastCartesianElement())
-                    
+                        Coordinate.putCoordinate(i.pt[0], i.pt[1])
         cv2.imshow(name, frame)
     
     cam.release()
