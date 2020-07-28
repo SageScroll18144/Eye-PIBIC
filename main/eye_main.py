@@ -19,7 +19,7 @@ def main(isToCut):
     scaleFactor = 1.3
     minNeighbors = 5
 
-    name = "Hey dboa man?"
+    name = "Eye tracking"
     
     bar_name = "value of trackbar eye:"
     cam = cv2.VideoCapture(0)
