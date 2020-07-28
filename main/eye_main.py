@@ -54,18 +54,16 @@ def main(isToCut):
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
         
-        obj.EventMovement()
-        '''
+        #obj.EventMovement()
         if cv2.waitKey(1) == ord('o'):
-            #for i in range(10):
             obj.move_dot()
-        '''
+       
         if cv2.waitKey(1) == ord('q') or obj.isToClose():
             obj.exit_window()
             break
 
         for (x,y,w,h) in faces:
-    
+            print(w)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
@@ -90,12 +88,14 @@ def main(isToCut):
                     keypoints = blob.blob_process(eye_img, blob_dt, limite)
                     cv2.drawKeypoints(eye_img, keypoints, eye_img, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
-
+                    
                     for i in keypoints:
                         for j in range(len(i.pt)):
-                            Coordinate.putCoordinate(i.pt[j])
-                            #print(Coordinate.getLastRightPos())
+                            Coordinate.putCartesianElement(cv2.KeyPoint_convert(keypoints))
+                            print(Coordinate.getLastCartesianElement())
                             '''
+                            #print(y)
+                            #print(Coordinate.getLastRightPos())
                             if(i.pt[j] < 25):
                                 print(i.pt[j], end='r ')
                             else: 

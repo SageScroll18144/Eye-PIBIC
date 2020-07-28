@@ -5,6 +5,7 @@ class Position:
         #posições globais 
         self.pos_left_eye = np.array([])
         self.pos_right_eye = np.array([])
+        self.cartesian = np.array([])
 
     # 0 -> LEFT AND 1 -> RIGHT 
     def getAllListPos(self, x):
@@ -40,3 +41,9 @@ class Position:
             self.setElementInRight(x)
         else:
             self.setElementInLeft(x)
+
+    def putCartesianElement(self, x):
+        self.cartesian = np.append(self.cartesian, x)
+
+    def getLastCartesianElement(self):
+        return self.cartesian[len(self.cartesian)-2], self.cartesian[len(self.cartesian)-1] 
