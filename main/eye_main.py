@@ -2,6 +2,7 @@ import cv2
 import blob
 import cutEye as ce
 import dot
+import pos
 
 def main(isToCut):
     title_window = ''
@@ -44,6 +45,9 @@ def main(isToCut):
     #Criando o ponto
     obj = dot.Dot()
 
+    #Objeto das coordenadas
+    Coordinate = pos.Position()
+
     while(True):
         ret, frame = cam.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -84,13 +88,17 @@ def main(isToCut):
                     cv2.drawKeypoints(eye_img, keypoints, eye_img, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
 
-                    for i in keypoints:  
+                    for i in keypoints:
                         for j in range(len(i.pt)):
-                            if(i.pt[j] < (w)/2):
+                            Coordinate.putCoordinate(i.pt[j])
+                            #print(Coordinate.getLastRightPos())
+                            '''
+                            if(i.pt[j] < 25):
                                 print(i.pt[j], end='r ')
                             else: 
                                 print(i.pt[j], end='l ')
                         print()
+                        '''
                     
         cv2.imshow(name, frame)
     
