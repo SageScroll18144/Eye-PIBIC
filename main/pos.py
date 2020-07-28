@@ -47,7 +47,7 @@ class Position:
         self.pos_left_eyeY = np.append(self.pos_left_eyeY, y)
 
     def putCoordinate(self, x, y):
-        faceLength = 85
+        faceLength = 110
         if(len(self.pos_left_eyeX) > 1 and len(self.pos_right_eyeX) > 1):
             faceLength = int((int(self.getLastRightPosX()) + int(self.getLastLeftPosX())) / 2)
         

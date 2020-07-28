@@ -88,7 +88,8 @@ def main(isToCut):
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
                     
                     for i in keypoints:
-                        Coordinate.putCoordinate(i.pt[0], i.pt[1])
+                        Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
+                        
         cv2.imshow(name, frame)
     
     cam.release()
