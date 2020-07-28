@@ -86,7 +86,7 @@ def main(isToCut):
 
                     for i in keypoints:  
                         for j in range(len(i.pt)):
-                            if(i.pt[j] < 25):
+                            if(i.pt[j] < (w)/2):
                                 print(i.pt[j], end='r ')
                             else: 
                                 print(i.pt[j], end='l ')
