@@ -66,10 +66,8 @@ class Dot:
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_o:
-                    list_times = np.array([])
-                    self.move_dot()
-                else:
-                    break
+                   return True
+        return False
 
     def isToClose(self):
         for event in pg.event.get():

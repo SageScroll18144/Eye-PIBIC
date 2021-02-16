@@ -3,8 +3,13 @@ import blob
 import cutEye as ce
 import dot
 import pos
+import pygame as pg
 
 def main(isToCut):
+    LIM = 100
+    ll = -1
+    lr = -1
+
     title_window = ''
 
     def on_trackbar(val):
@@ -53,6 +58,9 @@ def main(isToCut):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
+       
+        if obj.EventMovement():
+            obj.move_dot()  
         '''
         if cv2.waitKey(1) == ord('o') or obj.EventMovement():
             obj.move_dot()
@@ -88,6 +96,16 @@ def main(isToCut):
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
                     
                     for i in keypoints:
+                        #print(ex + i.pt[0], ey + i.pt[1])
+                        if LIM < ex:
+                            print("E ", end='')
+                            ll = ex
+                        elif LIM > ex:
+                            print("D ", end='')
+                            lr = ex
+                        if ll!=-1 and lr!=-1:
+                            LIM = (lr+ll)/2
+                                                    
                         print(ex + i.pt[0], ey + i.pt[1])
                         Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
                         

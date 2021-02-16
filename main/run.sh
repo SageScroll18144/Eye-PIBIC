@@ -1,0 +1,1 @@
+(echo python3 eye_main.py; echo python3 main_dot.py) | parallel
