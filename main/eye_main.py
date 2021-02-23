@@ -1,7 +1,7 @@
 import cv2
 import blob
 import cutEye as ce
-import dot
+#import dot
 import pos
 import pygame as pg
 import time 
@@ -49,7 +49,7 @@ def main(isToCut):
     cv2.createTrackbar(bar_name, name, 0, 255, nothing)
 
     #Criando o ponto
-    obj = dot.Dot()
+    #obj = dot.Dot()
 
     #Objeto das coordenadas
     Coordinate = pos.Position()
@@ -59,15 +59,15 @@ def main(isToCut):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
-       
+        '''
         if obj.EventMovement():
             obj.move_dot()  
-        '''
+        
         if cv2.waitKey(1) == ord('o') or obj.EventMovement():
             obj.move_dot()
-       '''
-        if cv2.waitKey(1) == ord('q') or cv2.waitKey(1) == ord('Q') or obj.isToClose():
-            obj.exit_window()
+        '''
+        if cv2.waitKey(1) == ord('q') or cv2.waitKey(1) == ord('Q'): #or obj.isToClose():
+            #obj.exit_window()
             break
 
         for (x,y,w,h) in faces:
