@@ -4,12 +4,13 @@ import cutEye as ce
 import dot
 import pos
 import pygame as pg
+import time 
 
 def main(isToCut):
     LIM = 100
     ll = -1
     lr = -1
-
+    tbegin = time.time()
     title_window = ''
 
     def on_trackbar(val):
@@ -106,7 +107,8 @@ def main(isToCut):
                         if ll!=-1 and lr!=-1:
                             LIM = (lr+ll)/2
                                                     
-                        print(ex + i.pt[0], ey + i.pt[1])
+                        print(ex + i.pt[0], ey + i.pt[1], end=' ')
+                        print(time.time() - tbegin)
                         Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
                         
         cv2.imshow(name, frame)

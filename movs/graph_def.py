@@ -46,10 +46,15 @@ elif(len(desl_r) > len(desl_l)):
 for i in range(0, 601-570):
     desl_r.append(0)
     desl_l.append(0)
-    
+
+for i in range(601):
+    if(desl_l[i] == 0):
+        desl_l[i] = 70
+    if(desl_r[i] == 0):
+        desl_r[i] = 70
 #plt.plot(time, [], "w")
-plt.plot(time, desl_l, "b-")
-plt.plot(time, desl_r, "r-")
+plt.plot(time, desl_l, "bs")
+plt.plot(time, desl_r, "rs")
 
 plt.title("LEITURA DE UM TEXTO")
 plt.ylabel("DESLOCAMENTO DO OLHO")
