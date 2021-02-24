@@ -11,6 +11,7 @@ def main(isToCut):
     ll = -1
     lr = -1
     tbegin = time.time()
+    print("Tempo inicial: ", tbegin)
     title_window = ''
 
     def on_trackbar(val):
