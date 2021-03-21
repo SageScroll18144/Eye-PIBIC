@@ -2,8 +2,8 @@ import cv2
 import blob
 import cutEye as ce
 #import dot
-import pos
-import pygame as pg
+#import pos
+#import pygame as pg
 import time 
 
 def main(isToCut):
@@ -53,7 +53,7 @@ def main(isToCut):
     #obj = dot.Dot()
 
     #Objeto das coordenadas
-    Coordinate = pos.Position()
+    #Coordinate = pos.Position()
 
     while(True):
         ret, frame = cam.read()
@@ -110,7 +110,7 @@ def main(isToCut):
                                                     
                         print(ex + i.pt[0], ey + i.pt[1], end=' ')
                         print(time.time() - tbegin)
-                        Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
+                        #Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
                         
         cv2.imshow(name, frame)
     
