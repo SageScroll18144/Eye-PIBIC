@@ -2,8 +2,8 @@ import cv2
 
 name = "Hey dboa man?"
 
-cam = cv2.VideoCapture(0)
-cam.set(cv2.CAP_PROP_FPS, 30)
+cam = cv2.VideoCapture(1)
+#cam.set(cv2.CAP_PROP_FPS, 30)
 
 while(True):
     ret, frame = cam.read()
