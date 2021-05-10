@@ -1,9 +1,6 @@
 import cv2
 import blob
 import cutEye as ce
-#import dot
-#import pos
-#import pygame as pg
 import time 
 
 def main(isToCut):
@@ -49,28 +46,15 @@ def main(isToCut):
     cv2.namedWindow(name)
     cv2.createTrackbar(bar_name, name, 0, 255, nothing)
 
-    #Criando o ponto
-    #obj = dot.Dot()
-
-    #Objeto das coordenadas
-    #Coordinate = pos.Position()
-
     while(True):
         ret, frame = cam.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         
         faces = face_cascade.detectMultiScale(gray, scaleFactor, minNeighbors)
-        '''
-        if obj.EventMovement():
-            obj.move_dot()  
-        
-        if cv2.waitKey(1) == ord('o') or obj.EventMovement():
-            obj.move_dot()
-        '''
-        if cv2.waitKey(1) == ord('q') or cv2.waitKey(1) == ord('Q'): #or obj.isToClose():
-            #obj.exit_window()
-            break
 
+        if cv2.waitKey(1) == ord('q'): 
+            break
+        
         for (x,y,w,h) in faces:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
@@ -110,8 +94,11 @@ def main(isToCut):
                                                     
                         print(ex + i.pt[0], ey + i.pt[1], end=' ')
                         print(time.time() - tbegin)
-                        #Coordinate.putCoordinate(ex + i.pt[0], ey + i.pt[1])
                         
+                        if cv2.waitKey(1) == ord('p'):
+                            print("VI O PONTO, tempo:", end=' ')
+                            print(time.time() - tbegin) 
+
         cv2.imshow(name, frame)
     
     cam.release()
@@ -121,7 +108,7 @@ if __name__ == '__main__':
     print("*Olá! Eu sou um chatbot*.\nTenho apenas uma pergunta. Você está em um ambiente sem luz?[S/n]")
     print(">", end=' ')
     inp = input()
-    print("\nPress the keyword 'Q' to exit or 'O' to move the dot.\n")
+    print("\nPress the keyword 'Q' to exit or 'P' to print the time.\n")
     if inp.upper() == 'S':
         main(False)
     else:
