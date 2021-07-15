@@ -25,7 +25,9 @@ def main(isToCut):
 
     name = "Eye tracking"
     
-    bar_name = "value of trackbar eye:"
+    bar_nameR = "value of first trackbar:"
+    bar_nameL = "value of second trackbar:"
+    
     cam = cv2.VideoCapture(0)
     cam.set(cv2.CAP_PROP_FPS, 30)
 
@@ -44,7 +46,8 @@ def main(isToCut):
 
     #Desenha as barras deslizantes na janela
     cv2.namedWindow(name)
-    cv2.createTrackbar(bar_name, name, 0, 255, nothing)
+    cv2.createTrackbar(bar_nameR, name, 0, 255, nothing)
+    cv2.createTrackbar(bar_nameL, name, 0, 255, nothing)
 
     while(True):
         ret, frame = cam.read()
@@ -54,7 +57,10 @@ def main(isToCut):
 
         if cv2.waitKey(1) == ord('q'): 
             break
-        
+        elif cv2.waitKey(1) == ord('p'):
+            print("VI O PONTO, tempo:", end=' ')
+            print(time.time() - tbegin)
+
         for (x,y,w,h) in faces:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
@@ -69,7 +75,8 @@ def main(isToCut):
                 if ey < 1/2*(y+h) - 100:
                     cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)   
                     try:
-                        limite = cv2.getTrackbarPos(bar_name, name) 
+                        limiteR = cv2.getTrackbarPos(bar_nameR, name) 
+                        limiteL = cv2.getTrackbarPos(bar_nameL, name) 
                     except IndexError:
                         print("Há mais de um elemento na cena que está atrapalhando a detecção do usuário. Try Again Pls :)")
 
@@ -77,8 +84,10 @@ def main(isToCut):
                     if isToCut:
                         eye_img = ce.cut_eyebrows(eye_img)
 
-                    keypoints = blob.blob_process(eye_img, blob_dt, limite)
+                    keypoints = blob.blob_process(eye_img, blob_dt, limiteR)
+                    keypoints1 = blob.blob_process(eye_img, blob_dt, limiteL)
                     cv2.drawKeypoints(eye_img, keypoints, eye_img, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+                    cv2.drawKeypoints(eye_img, keypoints1, eye_img, (0, 0, 255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
                     #cv2.imshow("asdf",blob.img_blob_process(eye_img, blob_dt, limite, 1))
                     
                     for i in keypoints:
@@ -94,11 +103,21 @@ def main(isToCut):
                                                     
                         print(ex + i.pt[0], ey + i.pt[1], end=' ')
                         print(time.time() - tbegin)
+        
+                    for i in keypoints1:
+                        #print(ex + i.pt[0], ey + i.pt[1])
+                        if LIM < ex:
+                            print("E ", end='')
+                            ll = ex
+                        elif LIM > ex:
+                            print("D ", end='')
+                            lr = ex
+                        if ll!=-1 and lr!=-1:
+                            LIM = (lr+ll)/2
+                                                    
+                        print(ex + i.pt[0], ey + i.pt[1], end=' ')
+                        print(time.time() - tbegin)
                         
-                        if cv2.waitKey(1) == ord('p'):
-                            print("VI O PONTO, tempo:", end=' ')
-                            print(time.time() - tbegin) 
-
         cv2.imshow(name, frame)
     
     cam.release()

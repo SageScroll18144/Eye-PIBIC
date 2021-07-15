@@ -17,6 +17,7 @@ for i in lista:
     desl.append(float(sublista[len(sublista)-1]))
     time.append(float(sublista[0]))
 
+plt.plot(time, desl, "r")
 plt.plot(time, desl, "ro")
 #plt.plot(time, desl_r, "rs")
 

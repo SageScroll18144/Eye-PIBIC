@@ -12,7 +12,7 @@ time_d = []
 def algorithm_DE(a, b):
     return m.sqrt(a**2+b**2)
 
-pos = open("movs/DaP2.txt", 'r')
+pos = open("movs/DaP3.txt", 'r')
 
 lista = pos.read().split('\n')
 
@@ -41,8 +41,8 @@ elif(len(desl_r) > len(desl_l)):
     for i in range(len(desl_r) - len(desl_l)):
         desl_r.append(0)
 
-for i in range(len(desl_r)):
-    print(time_d[i]," " , desl_r[i])
+for i in range(len(desl_l)):
+    print(time_e[i]," " , desl_l[i])
 '''
 print("\nDIREITO.:")
 
