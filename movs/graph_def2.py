@@ -7,17 +7,17 @@ time = []
 def algorithm_DE(a, b):
     return m.sqrt(a**2+b**2)
 
-pos = open("movs/olho direito.txt", 'r')
+pos = open("movs/tnormalE_cam.txt", 'r')
 
 lista = pos.read().split('\n')
 
 for i in lista:
     sublista = i.split(' ')
     #subdasub = sublista[len(sublista)-1].split('.')
-    desl.append(float(sublista[len(sublista)-1]))
-    time.append(float(sublista[0]))
+    desl.append(float(sublista[0]))
+    time.append(float(sublista[len(sublista)-1]))
 
-plt.plot(time, desl, "r")
+#plt.plot(time, desl, "r")
 plt.plot(time, desl, "ro")
 #plt.plot(time, desl_r, "rs")
 
