@@ -23,6 +23,8 @@ def main(isToCut):
     scaleFactor = 1.3
     minNeighbors = 5
 
+    arquivo = open('DADOS.txt','a')
+
     name = "Eye tracking"
     
     bar_nameR = "value of first trackbar:"
@@ -92,34 +94,42 @@ def main(isToCut):
                     
                     for i in keypoints:
                         #print(ex + i.pt[0], ey + i.pt[1])
+                        sd=''
                         if LIM < ex:
                             print("E ", end='')
+                            sd='E'
                             ll = ex
                         elif LIM > ex:
                             print("D ", end='')
+                            sd='D'
                             lr = ex
                         if ll!=-1 and lr!=-1:
                             LIM = (lr+ll)/2
                                                     
                         print(ex + i.pt[0], ey + i.pt[1], end=' ')
+                        arquivo.write(sd+" "+str(ex) + " " + str(i.pt[0])+ " " +str(ey) + str(i.pt[1]) + " "+ str(time.time() - tbegin)+"\n")
                         print(time.time() - tbegin)
         
                     for i in keypoints1:
                         #print(ex + i.pt[0], ey + i.pt[1])
+                        sd=''
                         if LIM < ex:
                             print("E ", end='')
+                            sd='E'
                             ll = ex
                         elif LIM > ex:
                             print("D ", end='')
+                            sd='D'
                             lr = ex
                         if ll!=-1 and lr!=-1:
                             LIM = (lr+ll)/2
                                                     
                         print(ex + i.pt[0], ey + i.pt[1], end=' ')
+                        arquivo.write(sd+" "+str(ex+i.pt[0])+ " " +str(ey+i.pt[1]) + " "+ str(time.time() - tbegin)+"\n")
                         print(time.time() - tbegin)
                         
         cv2.imshow(name, frame)
-    
+    arquivo.close()
     cam.release()
     cv2.destroyWindow(name) 
 
